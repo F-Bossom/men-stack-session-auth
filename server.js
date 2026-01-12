@@ -6,7 +6,7 @@ const morgan = require("morgan");
 const method0verride = require("method-override");
 const authRoutes = require("./controllers/auth");
 const session = require("express-session");
-const MongoStore = require("connect-mongo")
+const MongoStore = require("connect-mongo");
 
 // Middlewares
 require("./db/connection");
@@ -19,9 +19,11 @@ app.use(
     resave: false,
     saveUninitialized: true,
     store: MongoStore.create({
-        mongoUrl: process.env.MONGODB_URI,
-    })
-
+      mongoUrl: process.env.MONGODB_URI,
+    }),
+    cookie: {
+      maxAge: 1000 * 60 * 60 * 24,
+    },
   })
 );
 
